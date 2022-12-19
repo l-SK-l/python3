@@ -161,4 +161,4 @@ def count_chars(string, char):
 count_chars('HexlEt', 'e')
 count_chars('HexlEt', 'E')
 
-111
+11113
