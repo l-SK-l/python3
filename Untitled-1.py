@@ -148,17 +148,124 @@
 # То есть A и a с её точки зрения разные символы. 
 # Реализуйте вариант этой же функции, так чтобы регистр букв был не важен:
 
-def count_chars(string, char):
-    # string = string.lower()
-    
-    index = 0
-    count = 0
-    while index < len(string):
-        if string[index] == char:
-            count += 1
-        index += 1
-    return count
-count_chars('HexlEt', 'e')
-count_chars('HexlEt', 'E')
+# def count_chars(string, char):
+#     index = 0
+#     count = 0
+#     while index < len(string):
+#         if string[index].lower() == char.lower():
+#             count += 1
+#         index += 1
+#     return count
+# print(count_chars('HexlEt', 'e'))
+# print(count_chars('HexlEt', 'E'))
 
-11113
+# Реализуйте функцию my_substr(), которая извлекает из строки подстроку указанной длины. 
+# Она принимает на вход два аргумента: строку и длину, и возвращает подстроку, 
+# начиная с первого символа
+
+# string = 'If I look back I am lost'
+# def my_substr(string, length):
+#     index = 0
+#     substr = ''
+#     while index < length:
+#         substr = substr + string[index]
+#         index += 1
+#     return substr
+# print(my_substr(string, 7))
+
+
+# Реализуйте функцию-предикат is_arguments_for_substr_correct(), 
+# которая принимает три аргумента:
+#     строку;
+#     индекс, с которого начинать извлечение;
+#     длину извлекаемой подстроки.
+# Функция возвращает False, если хотя бы одно из условий истинно:
+#     Отрицательная длина извлекаемой подстроки.
+#     Отрицательный заданный индекс.
+#     Заданный индекс выходит за границу всей строки.
+#     Длина подстроки в сумме с заданным индексом выходит за границу всей строки.
+# В ином случае функция возвращает True.
+
+# string = 'Sansa Stark'
+# def is_arguments_for_substr_correct(string, index, length):
+#     if length < 0:
+#         return False
+#     elif index < 0:
+#         return False
+#     elif index > len(string) - 1:
+#         return False
+#     elif length + length > len(string):
+#         return False
+#     return True
+# print(is_arguments_for_substr_correct(string, 2, -3))   # => False
+# print(is_arguments_for_substr_correct(string, -1, 3))   # => False
+# print(is_arguments_for_substr_correct(string, 4, 100))  # => False
+# print(is_arguments_for_substr_correct(string, 10, 10))  # => False
+# print(is_arguments_for_substr_correct(string, 11, 1))   # => False
+# print(is_arguments_for_substr_correct(string, 3, 3))    # => True
+# print(is_arguments_for_substr_correct(string, 0, 5))    # => True
+
+# Реализуйте функцию filter_string(), принимающую на вход строку и символ, 
+# и возвращающую новую строку, в которой удален переданный символ во всех его позициях.
+
+# text = 'If I look back I am lost'
+# def filter_string(string, char):
+#     i = 0
+#     result = ""
+#     while i < len(string):
+#         if string[i] == char:
+#              result += ""
+#         elif string[i] != char:
+#             result += string[i]
+#         i += 1
+#     return result
+# print(filter_string(text, 'I'))
+# print(filter_string(text, 'o'))
+
+# # OR
+
+# def filter_string(text, char):
+#     index = 0
+#     result = ''
+#     while index < len(text):
+#         current_char = text[index]
+#         if current_char != char:
+#             result = f'{result}{current_char}'
+#         index += 1
+#     return result
+# print(filter_string(text, 'I'))
+# print(filter_string(text, 'o'))
+
+# Реализуйте функцию is_contains_char(), которая проверяет с учётом регистра, 
+# содержит ли строка указанную букву. Функция принимает два параметра:
+#     Строка
+#     Буква для поиска
+
+# def is_contains_char(string, char):
+#     i = 0
+#     while i < len(string):
+#         if string[i] == char:
+#             return True
+#         i += 1
+#     return False
+# print(is_contains_char('Hexlet', 'H'))  # => True
+# print(is_contains_char('Hexlet', 'h'))  # => False
+# print(is_contains_char('Awesomeness', 'm'))  # => True
+# print(is_contains_char('Awesomeness', 'd'))  # => False
+
+
+# В одном из предыдущих уроков мы уже написали функцию filter_string(). 
+# Напомним, она принимает на вход строку и символ и возвращает новую строку, 
+# в которой удалён переданный символ во всех его позициях. 
+# На этот раз реализуйте эту функцию с помощью цикла for. 
+# Дополнительное условие: регистр исключаемого символа не имеет значения.
+
+# text = 'If I look forward I win'
+# def filter_string(text, char):
+#     result = ''
+#     for corrent_text in text:
+#         if corrent_text.upper() != char.upper():
+#             result = f'{result}{corrent_text}'
+#     return result
+# print(filter_string(text, 'I'))  # 'f  look forward  wn'
+# print(filter_string(text, 'o'))  # 'If I lk frward I win'
