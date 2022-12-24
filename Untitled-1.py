@@ -269,3 +269,135 @@
 #     return result
 # print(filter_string(text, 'I'))  # 'f  look forward  wn'
 # print(filter_string(text, 'o'))  # 'If I lk frward I win'
+
+
+# Выведите все элементы списка с четными индексами 
+# (то есть A[0], A[2], A[4], ...). 
+
+# a = input().split()
+# for i in range(0, len(a), 2):
+#     print(a[i], end = ' ')
+
+
+# Выведите все четные элементы списка. При этом используйте цикл for, 
+# перебирающий элементы списка, а не их индексы! 
+
+# a = input().split()
+# for i in range(len(a)):
+#     a[i] = int(a[i])
+# # print(a)
+# for i in a:
+#     if i % 2 == 0:
+#         print(i, end=' ')
+
+# # OR
+
+# s = input()
+# a = [int(s) for s in s.split()]
+# for i in a:
+#     if int(i) % 2 == 0:
+#        print(i, end=' ')
+
+
+# Дан список чисел. Выведите все элементы списка, 
+# которые больше предыдущего элемента. 
+
+# s = input()
+# z = 0
+# a = [int(s) for s in s.split()]
+# # print(a)
+# for i in a[1:]:
+#     if i > a[z]:
+#         print(i, end = ' ')
+#     z += 1
+
+# # OR
+
+# a = [int(i) for i in input().split()]
+# for i in range(1, len(a)):
+#     if a[i] > a[i - 1]:
+#         print(a[i])
+
+# Дан список чисел. Если в нем есть два соседних элемента одного знака, 
+# выведите эти числа. Если соседних элементов одного знака нет — 
+# не выводите ничего. Если таких пар соседей несколько — 
+# выведите первую пару. 
+
+# a = [int(i) for i in input().split()]
+# x = 0
+# for i in a[1:]:
+#     if (a[x] < 0 and i < 0) == True:
+#         print(a[x], i)
+#         break
+#     elif (a[x] > 0 and i > 0) == True:
+#         print(a[x], i)
+#         break
+#     x += 1
+
+# # OR
+
+# a = [int(i) for i in input().split()]
+# for i in range(1, len(a)):
+#     if a[i - 1] * a[i] > 0:
+#         print(a[i - 1], a[i])
+#         break
+
+
+# Дан список, упорядоченный по неубыванию элементов в нем. 
+# Определите, сколько в нем различных элементов. 
+
+# a = [int(i) for i in input().split()]
+# new_list = []
+# count = 0
+# for i in a:
+#     if i not in new_list:
+#         count += 1
+#         new_list.append(i)
+# print(count)
+
+
+# Напишите функцию capitalize(), которая принимает слово из маленьких латинских букв
+#  и возвращает его же, меняя первую букву на большую.
+# Например, print(capitalize('word')) должно печатать слово Word. 
+# Слов может быть несколько через пробел. Слова состоят из маленьких латинских букв.
+
+# def capitalize(x):
+#     result = ""
+#     lst = x.split()
+#     for i in lst:
+#         first_letter = i[0].upper()
+#         other_letter = i[1:]
+#         result = result + first_letter + other_letter + " "
+#     return result
+
+# print(capitalize(input()))
+
+
+# В единственной строке записан текст. 
+# Для каждого слова из данного текста подсчитайте, 
+# сколько раз оно встречалось в этом тексте ранее.
+# Словом считается последовательность непробельных символов идущих подряд, 
+# слова разделены одним или большим числом пробелов или символами конца строки.
+
+# counter = {}  # создаём пустой словарь
+# for word in input().split():  # превращаем строку в отдельные значения, разделитель пробел
+#     counter[word] = counter.get(word, 0) + 1  # добавляем ключи в ловарь с цифрой 1 в значении при каждом добавлении ключа
+#     print(counter[word] - 1, end=' ')
+
+
+# В первой строке дано количество записей. 
+# Далее, каждая запись содержит фамилию кандидата и число голосов, 
+# отданных за него в одном из штатов. 
+# Подведите итоги выборов: для каждого из участника голосования определите число отданных за него голосов. 
+# Участников нужно выводить в алфавитном порядке.
+
+# num_votes = {}
+# for _ in range(int(input())):  # Указываем число строк
+#     candidate, votes = input().split()  # разбираем строки на 2 переменных, пример данных 'Obama 9'
+#     num_votes[candidate] = num_votes.get(candidate, 0) + int(votes)  #Добавляем данный в словарь складывая голова отдельно т.к. есть несколько строк с одним ключём и разными значениями
+
+# print(num_votes)  # выводим отсортированный словарь
+# for candidate, votes in sorted(num_votes.items()):  # сортируем словарь по ключу(items) и выводим пары ключ:значение по отдельности
+#     print(candidate, votes)
+
+
