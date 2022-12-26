@@ -67,7 +67,7 @@ while i < 1:
 showing_sticks()
 
 # Сама игра
-while True:  # Просим ввести число в цикле двух игроков
+while all_sticks > 0:  # Просим ввести число в цикле двух игроков
     if player_one_sticks < all_sticks - 1:  
         all_sticks -= taking_sticks(player_one_name)  # Просим взять 1-3 палочки и отнимаем их из общего числа
         showing_sticks()
