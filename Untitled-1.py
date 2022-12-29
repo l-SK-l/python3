@@ -401,3 +401,48 @@
 #     print(candidate, votes)
 
 
+# a = float(input(f'Enter a nomber: '))
+# a = round(a, 2)
+# print(f'{a} rounded to 2 decimal places is {a}')
+
+# a = int(input(f'Enter a nomber: '))
+# b = abs(a)
+# print(f'The absolute value of {a} is {b}')
+
+# a = float(input(f'Enter a nomber: '))
+# b = float(input(f'Enter another nomber: '))
+# if (a - b) % 1 == 0:
+#     c = True
+# else:
+#     c = False
+# print(f'The difference between {a} and {b} is an integer? {c}!')
+
+# a = 3 ** 0.125
+# print(f'{a:.3f}')  # 1.147
+# b = 150000
+# print(f'${b:,.2f}')  # $150,000.00
+# c = 2/10
+# print(f'{c:.0%}')  # 20%
+
+# def cube(x):
+#     return x ** 3
+# print(cube(2))
+
+# def greet(name):
+#     print(f'Hello {name}'!)
+# greet('Harry')
+
+# for x in range(2,11):
+#     print(x)
+
+# i = 2
+# while i < 11:
+#     print(i)
+#     i += 1
+
+def doubles(number):
+    return number * 2
+y = 2
+for x in range(3):
+    print(doubles(y))
+    y += y
