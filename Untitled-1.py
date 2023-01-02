@@ -440,9 +440,69 @@
 #     print(i)
 #     i += 1
 
-def doubles(number):
-    return number * 2
-y = 2
-for x in range(3):
-    print(doubles(y))
-    y += y
+# def doubles(number):
+#     return number * 2
+# y = 2
+# for x in range(3):
+#     print(doubles(y))
+#     y += y
+
+# def add_underscores(word):
+#     new_word = "_"
+#     for i in range(len(word)):
+#         new_word = new_word + word[i] + "_"
+#     return new_word
+# phrase = "hello"
+# print(add_underscores(phrase))
+
+# word = input(f'Введите слово: ')
+# if len(word) == 5:
+#     print('Длина ввода составляет 5 символов')
+# elif len(word) > 5:
+#     print('Длина ввода больше 5 символов')
+# else:
+#     print('Длина ввода меньше 5 символов')
+
+# while True:
+#   data = input("Введите данные (для выхода введите 'q' или 'Q'): ")
+#   if data.lower() == "q":
+#     break
+#   # Выполняем какие-то действия с введенными данными
+#   print("Вы ввели:", data)
+# print("Программа завершена.")
+
+# for i in range(51):
+#     if i % 3 == 0:
+#         continue
+#     print(i)
+    
+# try:
+#     number = int(input(f'Введите целое число: '))
+# except ValueError:
+#     print('Try again')
+# print(number)
+
+# string = input(f'Введите строку: ')
+# while True:
+#     try:
+#         number = int(input(f'Какой индекс необходимо вывести в консоль?: '))
+#         print(string[number])
+#     except ValueError:
+#         print('Это не число, попробуйте ещё раз')
+#         continue
+#     except IndexError:
+#         print('Индекс выходит за границу массива, попробуйте ещё раз')
+#         continue
+#     break
+
+# def roll():
+#     import random
+#     return random.randint(1, 6)
+# print(roll())
+
+import random
+mean = 0
+for i in range(10000):
+    mean += random.randint(1, 6)
+mean = mean / 10000
+print(f'Среднее значение из 10000 бросков: {mean:.2f}')
