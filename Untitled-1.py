@@ -500,9 +500,46 @@
 #     return random.randint(1, 6)
 # print(roll())
 
-import random
-mean = 0
-for i in range(10000):
-    mean += random.randint(1, 6)
-mean = mean / 10000
-print(f'Среднее значение из 10000 бросков: {mean:.2f}')
+# import random
+# mean = 0
+# for i in range(10000):
+#     mean += random.randint(1, 6)
+# mean = mean / 10000
+# print(f'Среднее значение из 10000 бросков: {mean:.2f}')
+
+# cardinal_numbers = ("first", "second", "third")
+# print(cardinal_numbers[1])
+# position1, position2, position3 = cardinal_numbers
+# print(position3)
+# my_name = tuple("sergei")
+# print(my_name)
+# print("x" in my_name)
+# new_tuple = my_name[1:]
+# print(new_tuple)
+
+food = ["rice", "beans"]
+print(food)
+food.append("broccoli")
+print(food)
+food.extend(["bread", "pizza"])
+print(food)
+print(food[0:2])
+print(food[-1])
+breakfast = "eggs,fruit,orangejuice".split(',')
+print(breakfast)
+print(len(breakfast))
+lengths = [len(i) for i in breakfast]
+print(lengths)
+
+# data = ((1,2), (3,4))
+# print(data)
+# for i in data:
+#     count_list = 1
+#     print(f'Row {count_list} sum: {sum(i)}')
+#     count_list += 1
+
+# numbers = [4,3,2,1]
+# copy_numbers = numbers[:]
+# numbers.sort()
+# print(numbers)
+# print(copy_numbers)
