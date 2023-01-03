@@ -517,19 +517,19 @@
 # new_tuple = my_name[1:]
 # print(new_tuple)
 
-food = ["rice", "beans"]
-print(food)
-food.append("broccoli")
-print(food)
-food.extend(["bread", "pizza"])
-print(food)
-print(food[0:2])
-print(food[-1])
-breakfast = "eggs,fruit,orangejuice".split(',')
-print(breakfast)
-print(len(breakfast))
-lengths = [len(i) for i in breakfast]
-print(lengths)
+# food = ["rice", "beans"]
+# print(food)
+# food.append("broccoli")
+# print(food)
+# food.extend(["bread", "pizza"])
+# print(food)
+# print(food[0:2])
+# print(food[-1])
+# breakfast = "eggs,fruit,orangejuice".split(',')
+# print(breakfast)
+# print(len(breakfast))
+# lengths = [len(i) for i in breakfast]
+# print(lengths)
 
 # data = ((1,2), (3,4))
 # print(data)
@@ -543,3 +543,26 @@ print(lengths)
 # numbers.sort()
 # print(numbers)
 # print(copy_numbers)
+
+# captains = {}
+# captains['Enterprise'] = 'Picard'
+# captains['Voyager'] = 'Janeway'
+# captains['Defiant'] = 'Sisko'
+# if 'Enterprise' not in captains:
+#     captains['Enterprise'] = 'unknown'
+# if 'Discovery' not in captains:
+#     captains['Discovery'] = 'unknown'
+# for key in captains:
+#     print(f'The {key} is captained by {captains[key]}.')
+# del captains['Discovery']
+# print(captains)
+
+# captains = dict(
+#     [
+#         ("Enterprise", "Picard"),
+#         ("Voyager", "Janeway"),
+#         ("Defiant", "Sisko"),
+#     ]
+# )
+# print(captains)
+
