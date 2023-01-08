@@ -647,3 +647,55 @@
 # folder_a = new_dir / "folder_a"
 # shutil.rmtree(folder_a)  # Удаляем папку со всем содержимым
 # print(folder_a.exists())
+
+# from pathlib import Path
+# path = Path.home() / "hello.txt"  # Определяем пусть файла
+# path.touch()  # Создаём файл
+# file = path.open(mode="r", encoding="utf-8")  # открываем файл через Path
+# print(file)
+# file.close()  # Закрываем файл
+# # тоже самое через встроенную функцию open()
+# file_path = "C:/Users/sekozlov/hello.txt"  # Определяем пусть файла
+# file = open(file_path, mode="r", encoding="utf-8")  # открываем файл
+# print(file)
+# file.close()
+# # Открытие файла с его автоматическим закрытием
+# path = Path.home() / "hello.txt"  # Определяем пусть файла
+# path.touch()  # Создаём файл
+# with path.open(mode="r", encoding="utf-8") as file:  # объект присваивается переменной file
+#     # Работа с файлом
+
+# # Читаем файл
+# from pathlib import Path
+# path = Path.home() / "hello.txt"
+# with path.open(mode="r", encoding="utf-8") as file:  # объект присваивается переменной file
+#     text = file.read()  # файл читается и результат присваивается переменной text
+# print(text)  # Выводим на экран
+# # Читаем по строкам
+# with path.open(mode="r", encoding="utf-8") as file:
+#     for line in file.readlines():  # .readlines() возвращает итерируемый набор текстовых строк файла.
+#         print(line, end="")  # end убирает пустую строку между строк
+
+
+# # Записываем в файл
+# from pathlib import Path
+# path = Path.home() / "hello.txt"
+# with path.open(mode="w", encoding="utf-8") as file:  # Открываем с w
+#     file.write("Hi there!")  # Пишем строку, перезаписывая содержимое
+
+# # Записываем в конец файла
+# from pathlib import Path
+# path = Path.home() / "hello.txt"
+# with path.open(mode="a", encoding="utf-8") as file:
+#     file.write("\nHello")
+
+# Записываем несколько строк
+from pathlib import Path
+lines_of_text = [
+"\nHello from Line 1\n",
+"Hello from Line 2\n",
+"Hello from Line 3 \n",
+]
+path = Path.home() / "hello.txt"
+with path.open(mode="a", encoding="utf-8") as file:
+    file.writelines(lines_of_text)  # Пишем список
