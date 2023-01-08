@@ -689,13 +689,116 @@
 # with path.open(mode="a", encoding="utf-8") as file:
 #     file.write("\nHello")
 
-# Записываем несколько строк
-from pathlib import Path
-lines_of_text = [
-"\nHello from Line 1\n",
-"Hello from Line 2\n",
-"Hello from Line 3 \n",
-]
-path = Path.home() / "hello.txt"
-with path.open(mode="a", encoding="utf-8") as file:
-    file.writelines(lines_of_text)  # Пишем список
+# # Записываем несколько строк
+# from pathlib import Path
+# lines_of_text = [
+# "\nHello from Line 1\n",
+# "Hello from Line 2\n",
+# "Hello from Line 3 \n",
+# ]
+# path = Path.home() / "hello.txt"
+# with path.open(mode="a", encoding="utf-8") as file:
+#     file.writelines(lines_of_text)  # Пишем список
+
+# # Работа с CSV
+# from pathlib import Path
+# temperature_readings = [68, 65, 68, 70, 74, 72]  # Создаём список
+# file_path = Path.home() / "temperatures.csv"  # Создаём путь в файлу
+# with file_path.open(mode="a", encoding="utf-8") as file:  # открываем файл в режиме присоединения
+#     file.write(str(temperature_readings[0]))   # Пишем первое значение в файл
+#     for temp in temperature_readings[1:]:  # Пишем остальные значения в той же строке в цикле с разделяющей запятой
+#         file.write(f",{temp}")
+# with file_path.open(mode="r", encoding="utf-8") as file:
+#     text = file.read()  # Читаем файл
+# print(text)
+# temperatures = text.split(",")  # Создаём список из текста обратно
+# print(temperatures)
+# int_temperatures = [int(temp) for temp in temperatures]  # Приобразовываем в int
+# print(int_temperatures)
+
+# # Модуль CSV
+# # csv.writer
+# from pathlib import Path
+# import csv
+# daily_temperatures = [  # Список списков
+#     [68, 65, 68, 70, 74, 72],
+#     [67, 67, 70, 72, 72, 70],
+#     [68, 70, 74, 76, 74, 73],
+#     ]
+# file_path = Path.home() / "temperatures.csv"  # Определяем путь к файлу
+# """Вместо того чтобы использовать команду with, мы создаем
+# файловый объект и присваиваем его переменной file, чтобы вы
+# могли проанализировать каждый шаг в процессе записи данных."""
+# # file = file_path.open(mode="w", encoding="utf-8", newline="")  # newline необходим для корректного перехода строк
+# # writer = csv.writer(file)  # Передаём файловый обект методу csv
+# # for temp_list in daily_temperatures:  # Передаём в цикле каждый список из списка
+# #     writer.writerow(temp_list)  # Записываем каждый список в новую строку в файле
+# # file.close()  # Закрываем файл
+# # Более правильный вариант
+# # with file_path.open(mode="w", encoding="utf-8", newline="") as file:  # newline необходим для корректного перехода строк
+# #     writer = csv.writer(file)  # Передаём файловый обект методу csv
+# # for temp_list in daily_temperatures:  # Передаём в цикле каждый список из списка
+# #     writer.writerow(temp_list)  # Записываем каждый список в новую строку в файле
+# # Ещё короче, записываем сразу несколько строк через .writerows
+# with file_path.open(mode="w", encoding="utf-8", newline="") as file:  # newline необходим для корректного перехода строк
+#     writer = csv.writer(file)  # Передаём файловый обект методу csv
+#     writer.writerows(daily_temperatures)  # Записываем все списки разом в новую строку в файле
+
+# # csv.reader
+# from pathlib import Path
+# import csv
+# file_path = Path.home() / "temperatures.csv"  # Определяем путь к файлу
+# # file = file_path.open(mode="r", encoding="utf-8", newline="")  # Открываем файл в режиме чтения
+# # reader = csv.reader(file)  # csv.reader() возвращает объект чтения CSV, который может использоваться для перебора строк в файле CSV
+# # for row in reader:  # Читаем каждую строку
+# #     print(row)
+# # file.close()
+# '''Каждая строка файла CSV возвращается в виде списка строк.
+# Чтобы восстановить список списков daily_temperatures,
+# необходимо преобразовать каждый список строк в список целых
+# чисел при помощи генератора списка'''
+# daily_temperatures = []  # Создание пустого списка
+# with file_path.open(mode="r", encoding="utf-8", newline="") as file:
+#     reader = csv.reader(file)
+#     for row in reader:
+#         int_row = [int(value) for value in row]  # Преобразование строки в список целых чисел
+#         daily_temperatures.append(int_row)  # Присоединение списка целых чисел к списку daily_temperatures
+# print(daily_temperatures)
+
+# # Чтение и запись файлов CSV с заголовками
+# from pathlib import Path
+# import csv
+# file_path = Path.home() / "employees.csv"  # Определяем путь к файлу
+# file = file_path.open(mode='r', encoding='utf-8', newline='')
+# reader = csv.DictReader(file)  # записывает словари с совместно используемыми ключами в строки файла CSV
+# '''При создании объекта DictReader предполагается, что
+# первая строка файла CSV содержит имена полей. Эти значения
+# сохраняются в списке и присваиваются атрибуту .fieldnames
+# экземпляра DictReader'''
+# print(reader.fieldnames)
+# for row in reader:  # Можно перебирать
+#     print(row)
+# file.close()
+# def process_row(row):  # Можно преобразовать данные 
+#     row["salary"] = float(row["salary"])
+#     return row
+# with file_path.open(mode="r", encoding="utf-8", newline="") as file: 
+#     reader = csv.DictReader(file)  # записывает словари с совместно используемыми ключами в строки файла CSV
+#     for row in reader:
+#         print(process_row(row))
+
+# # Записываем словари с ключами в CSV
+# from pathlib import Path
+# import csv
+# people = [
+#     {"name": "Veronica", "age": 29},
+#     {"name": "Audrey", "age": 32},
+#     {"name": "Sam", "age": 24},
+#     ]
+# file_path = Path.home() / "people.csv"
+# file = file_path.open(mode="w", encoding="utf-8", newline="")
+# writer = csv.DictWriter(file, fieldnames=["name", "age"])
+# '''Когда вы создаете экземпляр DictWriter, в первом
+# параметре передается файловый объект для записи данных CSV.
+# Параметр fieldnames, который является обязательным,
+# содержит список строк с именами полей.'''
