@@ -615,7 +615,7 @@
 # print(list(new_dir.glob("?older_?")))  # Можно указывать несколько
 # print(list(new_dir.glob("1.??")))  # Подставные символы можно объединять
 # print(list(new_dir.glob("program[13].py")))  # В [] указывают символы по аналогии с ?, проверяется любой из указанных символов, но только 1
-# # Ищем рекурсивно в подкаталогах 
+# # Ищем рекурсивно в подкаталогах
 # print(list(new_dir.glob("**/*.txt")))  # Все .txt включая в подкаталогах
 # print(list(new_dir.rglob("*.py")))  # Все файлы .py, но рекурсивно
 
@@ -779,10 +779,10 @@
 # for row in reader:  # Можно перебирать
 #     print(row)
 # file.close()
-# def process_row(row):  # Можно преобразовать данные 
+# def process_row(row):  # Можно преобразовать данные
 #     row["salary"] = float(row["salary"])
 #     return row
-# with file_path.open(mode="r", encoding="utf-8", newline="") as file: 
+# with file_path.open(mode="r", encoding="utf-8", newline="") as file:
 #     reader = csv.DictReader(file)  # записывает словари с совместно используемыми ключами в строки файла CSV
 #     for row in reader:
 #         print(process_row(row))
@@ -802,3 +802,190 @@
 # параметре передается файловый объект для записи данных CSV.
 # Параметр fieldnames, который является обязательным,
 # содержит список строк с именами полей.'''
+
+# # SQLite
+# from pathlib import Path
+# import sqlite3
+# connection = sqlite3.connect(Path.home() / "test_database.db")  # Ищем БД или создаём
+# print(type(connection))
+# cursor = connection.cursor()  # cursor объект для хранения данных
+# print(type(cursor))
+# query = "SELECT datetime('now', 'localtime');"  # команда SQL
+# results = cursor.execute(query)  # команду передаём  в cursor.execute
+# '''Команда применяет запрос к базе данных и
+# возвращает объект Cursor, который присваивается переменной
+# results.'''
+# print(results)
+# '''Чтобы получить результаты запроса, используйте
+# метод results.fetchone(), который возвращает кортеж с
+# первой строкой результатов'''
+# row = results.fetchone()
+# print(row)
+# '''.fetchone() возвращает кортеж, необходимо
+# обратиться к первому элементу для получения строки с
+# информацией о дате и времени'''
+# time = row[0]
+# print(time)
+# connection.close()  # Закрываем соединение
+
+# # Использование with для управления подключением к базе данных
+# from pathlib import Path
+# import sqlite3
+# connection = sqlite3.connect(Path.home() / "test_database.db")  # Ищем БД или создаём
+# with sqlite3.connect("test_database.db") as connection:
+#     cursor = connection.cursor()  # Создаём новый объект
+#     query = "SELECT datetime('now', 'localtime');"  # Команда
+#     results = cursor.execute(query)  # Выполняем команду
+#     row = results.fetchone()  # Получаем кортеж с результатом
+#     time = row[0]  # Получаем строку из кортежа
+# print(time)
+
+# # Работа с таблицами базы данных
+# from pathlib import Path
+# import sqlite3
+# # Сначала создаются две строки с командами SQL, которые создают таблицу People и вставляют в нее данные.
+# create_table = """  
+# CREATE TABLE People(
+#     FirstName TEXT,
+#     LastName TEXT,
+#     Age INT
+# );"""
+# insert_values = """
+# INSERT INTO People VALUES(
+#     'Ron',
+#     'Obvious',
+#     42
+# );"""
+# connection = sqlite3.connect(Path.home() / "test_database.db")
+# cursor = connection.cursor()  # cursor объект для хранения данных
+# cursor.execute(create_table)  # Выполняем команды выше
+# cursor.execute(insert_values)
+# connection.commit()  # Сохраняем информацию в БД
+# query = "SELECT * FROM People;"  # Создаём запрос
+# results = cursor.execute(query)  # Выполняем запрос
+# print(results.fetchone())  # Выводим запрос
+# cursor.execute("DROP TABLE People;")  # Запрос на удаление таблицы (не файла)
+# connection.commit()  # Сохраняем информацию в БД
+# connection.close()  # Закрываем соединение
+
+# # Тоже самое через with
+# from pathlib import Path
+# import sqlite3
+# create_table = """
+# CREATE TABLE People(
+#     FirstName TEXT,
+#     LastName TEXT,
+#     Age INT
+# );"""
+# insert_values = """
+#     INSERT INTO People VALUES(
+#     'Ron',
+#     'Obvious',
+#     42
+# );"""
+# with sqlite3.connect(Path.home() / "test_database.db") as connection:
+#     cursor = connection.cursor()
+#     cursor.execute(create_table)
+#     cursor.execute(insert_values)
+#     query = "SELECT * FROM People;"  # Создаём запрос
+#     results = cursor.execute(query)  # Выполняем запрос
+#     cursor.execute("DROP TABLE People;")  # Запрос на удаление таблицы (не файла)
+
+# # Выполнение нескольких команд SQL
+# from pathlib import Path
+# import sqlite3
+# sql = """
+# DROP TABLE IF EXISTS People;
+# CREATE TABLE People(
+#     FirstName TEXT,
+#     LastName TEXT,
+#     Age INT
+# );
+#     INSERT INTO People VALUES(
+#     'Ron',
+#     'Obvious',
+#     42
+# );"""
+# with sqlite3.connect(Path.home() / "test_database.db") as connection:
+#     cursor = connection.cursor()
+#     cursor.executescript(sql)
+# '''возможно выполнить несколько сходных команд,
+# вызвав метод .executemany() и передав кортеж кортежей, в
+# котором каждый внутренний кортеж предоставляет информацию
+# для одной команды.'''
+# people_values = (
+#     ("Ron", "Obvious", 42),
+#     ("Luigi", "Vercotti", 43),
+#     ("Arthur", "Belling", 28)
+# )
+# cursor.executemany("INSERT INTO People VALUES(?, ?, ?)", people_values)
+# # Ещё пример
+# from pathlib import Path
+# import sqlite3
+# first_name = input("Enter your first name: ")
+# last_name = input("Enter your last name: ")
+# age = int(input("Enter your age: "))
+# data = (first_name, last_name, age)
+# with sqlite3.connect(Path.home() / "test_database.db") as connection:
+#     cursor = connection.cursor()
+#     cursor.execute("INSERT INTO People VALUES(?, ?, ?);", data)
+#     # cursor.execute("UPDATE People SET Age=? WHERE FirstName=?AND LastName=?;",(45, 'Luigi', 'Vercotti'))  # SQL UPDATE
+
+# # Чтение данных SQL
+# from pathlib import Path
+# import sqlite3
+# values = (
+#     ("Ron", "Obvious", 42),
+#     ("Luigi", "Vercotti", 43),
+#     ("Arthur", "Belling", 28),
+# )
+# with sqlite3.connect(Path.home() / "test_database.db") as connection:
+#     cursor = connection.cursor()
+#     cursor.execute("DROP TABLE IF EXISTS People")
+#     cursor.execute("""
+#         CREATE TABLE People(
+#             FirstName TEXT,
+#             LastName TEXT,
+#             Age INT
+#         );"""
+#     )
+#     cursor.executemany("INSERT INTO People VALUES(?, ?, ?);", values)
+#     # Выбрать все имена и фамилии людей, возраст которых
+#     # превышает 30 лет
+#     cursor.execute( "SELECT FirstName, LastName FROM People WHERE Age > 30;")
+#     for row in cursor.fetchall(): 
+#         print(row)
+#     '''.fetchall() возвращает результаты запроса в
+#     виде списка кортежей, в котором каждый кортеж содержит одну
+#     строку данных из результатов запроса.'''
+
+# HTML
+from urllib.request import urlopen
+
+url = "http://olympus.realpython.org/profiles/aphrodite"
+page = urlopen(url)  # Открываем страницу
+# print(page)
+html = page.read().decode("utf-8") # Извлекаем HTML код и декодируем в utf-8
+# print(html)
+start_index = html.find("<title>") + len("<title>")  # Находим заголок и индекс самого заголовка
+end_index = html.find("</title>")  # Находим индекс закрывающего тега
+title = html[start_index:end_index]  # Извлекаем текст с помощаю среза
+print(title)
+# url = "http://olympus.realpython.org/profiles/poseidon"
+# page = urlopen(url)
+# html = page.read().decode("utf-8")
+# start_index = html.find("<title>") + len("<title>")
+# end_index = html.find("</title>")
+# title = html[start_index:end_index]
+# print(title)
+
+# Знакомство с регулярными выражениями
+import re
+from urllib.request import urlopen
+url = "http://olympus.realpython.org/profiles/dionysus"
+page = urlopen(url)
+html = page.read().decode("utf-8")
+pattern = "<title.*?>.*?</title.*?>"
+match_results = re.search(pattern, html, re.IGNORECASE)
+title = match_results.group()
+title = re.sub("<.*?>", "", title) # Удалить теги HTML
