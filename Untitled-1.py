@@ -844,7 +844,7 @@
 # from pathlib import Path
 # import sqlite3
 # # Сначала создаются две строки с командами SQL, которые создают таблицу People и вставляют в нее данные.
-# create_table = """  
+# create_table = """
 # CREATE TABLE People(
 #     FirstName TEXT,
 #     LastName TEXT,
@@ -953,39 +953,48 @@
 #     # Выбрать все имена и фамилии людей, возраст которых
 #     # превышает 30 лет
 #     cursor.execute( "SELECT FirstName, LastName FROM People WHERE Age > 30;")
-#     for row in cursor.fetchall(): 
+#     for row in cursor.fetchall():
 #         print(row)
 #     '''.fetchall() возвращает результаты запроса в
 #     виде списка кортежей, в котором каждый кортеж содержит одну
 #     строку данных из результатов запроса.'''
 
-# HTML
-from urllib.request import urlopen
+# # HTML
+# from urllib.request import urlopen
+# url = "http://olympus.realpython.org/profiles/aphrodite"
+# page = urlopen(url)  # Открываем страницу
+# # print(page)
+# html = page.read().decode("utf-8") # Извлекаем HTML код и декодируем в utf-8
+# # print(html)
+# start_index = html.find("<title>") + len("<title>")  # Находим заголок и индекс самого заголовка
+# end_index = html.find("</title>")  # Находим индекс закрывающего тега
+# title = html[start_index:end_index]  # Извлекаем текст с помощаю среза
+# print(title)
+# # url = "http://olympus.realpython.org/profiles/poseidon"
+# # page = urlopen(url)
+# # html = page.read().decode("utf-8")
+# # start_index = html.find("<title>") + len("<title>")
+# # end_index = html.find("</title>")
+# # title = html[start_index:end_index]
+# # print(title)
 
-url = "http://olympus.realpython.org/profiles/aphrodite"
-page = urlopen(url)  # Открываем страницу
-# print(page)
-html = page.read().decode("utf-8") # Извлекаем HTML код и декодируем в utf-8
-# print(html)
-start_index = html.find("<title>") + len("<title>")  # Находим заголок и индекс самого заголовка
-end_index = html.find("</title>")  # Находим индекс закрывающего тега
-title = html[start_index:end_index]  # Извлекаем текст с помощаю среза
-print(title)
-# url = "http://olympus.realpython.org/profiles/poseidon"
+# # Знакомство с регулярными выражениями
+# import re
+# from urllib.request import urlopen
+# url = "http://olympus.realpython.org/profiles/dionysus"
 # page = urlopen(url)
 # html = page.read().decode("utf-8")
-# start_index = html.find("<title>") + len("<title>")
-# end_index = html.find("</title>")
-# title = html[start_index:end_index]
+# pattern = "<title.*?>.*?</title.*?>"
+# match_results = re.search(pattern, html, re.IGNORECASE)
+# title = match_results.group()
+# title = re.sub("<.*?>", "", title) # Удалить теги HTML
 # print(title)
 
-# Знакомство с регулярными выражениями
-import re
+# Извлечения веб-данных
+from bs4 import BeautifulSoup
 from urllib.request import urlopen
 url = "http://olympus.realpython.org/profiles/dionysus"
 page = urlopen(url)
 html = page.read().decode("utf-8")
-pattern = "<title.*?>.*?</title.*?>"
-match_results = re.search(pattern, html, re.IGNORECASE)
-title = match_results.group()
-title = re.sub("<.*?>", "", title) # Удалить теги HTML
+# "html.parser" — это встроенный парсер HTML языка Python
+soup = BeautifulSoup(html, "html.parser")
